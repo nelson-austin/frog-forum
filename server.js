@@ -13,3 +13,5 @@ mongodb.initDb((err, mongodb) => {
       });
     }
   });
+
+app.use(express.json());
