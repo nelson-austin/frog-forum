@@ -1,15 +1,15 @@
-// const router = require('express').Router();
+const router = require('express').Router();
 
-// const postsController = require('../controllers/posts');
+const postsController = require('../controllers/posts');
 
-// router.get('/', postsController.getAllPosts);
+router.get('/', postsController.getAllPost);
 
-// router.get('/:id', postsController.getPost);
+router.get('/:id', postsController.getOnePost);
 
-// router.post('/', postsController.createPost);
+router.post('/', postsController.createPost);
 
-// router.put('/:id', postsController.updatePost);
+router.put('/:id', postsController.updatePost);
 
-// router.delete('/:id', postsController.deletePost);
+router.delete('/:id', postsController.removePost);
 
-// module.exports = router;
+module.exports = router;

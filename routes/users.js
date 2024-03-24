@@ -1,15 +1,15 @@
-// const router = require('express').Router();
+const router = require('express').Router();
 
-// const usersController = require('../controllers/users');
+const usersController = require('../controllers/users');
 
-// router.get('/', usersController.getAllUsers);
+router.get('/', usersController.getAllUser);
 
-// router.get('/:id', usersController.getUser);
+router.get('/:id', usersController.getOneUser);
 
-// router.post('/', usersController.createUser);
+router.post('/', usersController.createUser);
 
-// router.put('/:id', usersController.updateUser);
+router.put('/:id', usersController.updateUser);
 
-// router.delete('/:id', usersController.deleteUser);
+router.delete('/:id', usersController.removeUser);
 
-// module.exports = router;
+module.exports = router;
