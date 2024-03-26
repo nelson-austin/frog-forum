@@ -223,6 +223,23 @@
         "produces": [
           "application/json"
         ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userId": {
+                  "example": "any"
+                },
+                "followers": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
         "responses": {
           "201": {
             "description": "Created"
@@ -305,6 +322,23 @@
         "description": "",
         "produces": [
           "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userId": {
+                  "example": "any"
+                },
+                "following": {
+                  "example": "any"
+                }
+              }
+            }
+          }
         ],
         "responses": {
           "201": {
