@@ -5,22 +5,12 @@
     "description": "Description",
     "version": "1.0.0"
   },
-  "host": "frog-forum.onrender.com",
+  "host": "localhost:3000",
   "basePath": "/",
   "schemes": [
-    "https"
+    "http"
   ],
   "paths": {
-    "/api-docs": {
-      "get": {
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
     "/posts/": {
       "get": {
         "description": "",
@@ -120,6 +110,35 @@
         "description": "",
         "produces": [
           "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "givenName": {
+                  "example": "any"
+                },
+                "firstName": {
+                  "example": "any"
+                },
+                "lastName": {
+                  "example": "any"
+                },
+                "birthday": {
+                  "example": "any"
+                },
+                "profilePicUrl": {
+                  "example": "any"
+                },
+                "email": {
+                  "example": "any"
+                }
+              }
+            }
+          }
         ],
         "responses": {
           "201": {

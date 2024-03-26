@@ -9,9 +9,6 @@ const checkJwt = auth({
 });
 
 
-//router.use('/api', checkJwt, require('./swagger')); *commented out until functional
-
-router.use('/api', require('./swagger'));
 router.use('/posts', require('./posts'));
 router.use('/users', require('./users'));
 router.use('/followers', require('./followers'));
