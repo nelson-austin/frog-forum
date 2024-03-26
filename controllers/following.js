@@ -1,5 +1,5 @@
 const mongodb = require('../db/connect');
-const ObjectId = mongodb.ObjectId;
+const ObjectId = require('mongodb').ObjectId;
 
 const getAllFollowing = async (req, res) => {
     const result = await mongodb.getDb().db('frogforum').collection('following').find();
@@ -10,10 +10,13 @@ const getAllFollowing = async (req, res) => {
   };
 
 const getOneFollowing = async (req, res) => {
-    const result = await mongodb.getDb().db('frogforum').collection('following').findOne({ _id: ObjectId(req.params.id) });
+  const userId = new ObjectId(req.params.id);
+  const result = await mongodb.getDb().db('frogforum').collection('following').find({ _id: userId });
+  result.toArray().then((lists) => {
     res.setHeader('Content-Type', 'application/json');
-    res.status(200).json(result);
-    }
+    res.status(200).json(lists[0]);
+  });
+}
 
 const createFollowing = async (req, res) => {
     const following = {
@@ -41,10 +44,14 @@ const updateFollowing = async (req, res) => {
   }
 
 const removeFollowing = async (req, res) => {
-    const result = await mongodb.getDb().db('frogforum').collection('following').deleteOne({ _id: ObjectId(req.params.id) });
-    res.setHeader('Content-Type', 'application/json');
-    res.status(200).json(result);
+  if (!ObjectId.isValid(req.params.id)) {
+    res.status(400).json('Invalid user id. Please try again.');
   }
+  const userId = new ObjectId(req.params.id);
+  const result = await mongodb.getDb().db('frogforum').collection('following').deleteOne({ _id: userId });
+  res.setHeader('Content-Type', 'application/json');
+  res.status(200).json(result);
+}
 
 module.exports = {
     getAllFollowing,
