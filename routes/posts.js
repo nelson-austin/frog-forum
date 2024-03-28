@@ -6,6 +6,8 @@ router.get('/', postsController.getAllPosts);
 
 router.get('/:id', postsController.getOnePost);
 
+router.get('/:followers', postsController.getAllPostsByAuthorId);
+
 router.post('/', postsController.createPost);
 
 router.put('/:id', postsController.updatePost);

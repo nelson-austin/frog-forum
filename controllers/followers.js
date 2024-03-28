@@ -3,7 +3,7 @@ const mongodb = require('../db/connect');
 const ObjectId = require('mongodb').ObjectId;
 
 const getAllFollowers = async (req, res) => {
-    const result = await mongoObjectId.getDb().db('frogforum').collection('followers').find();
+    const result = await mongodb.getDb().db('frogforum').collection('followers').find();
     result.toArray().then((lists) => {
       res.setHeader('Content-Type', 'application/json');
       res.status(200).json(lists);

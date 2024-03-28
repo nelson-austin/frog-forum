@@ -10,6 +10,13 @@ const getAllPosts = async (req, res) => {
   });
 };
 
+const getAllPostsByAuthorId = async(req, res) => {
+  const ids = req.params.followers.split(',');
+  const result = await dbFunctions.getMongoDb("posts").findAll({ authorId: {$in: ids} }).toArray();
+  res.setHeader("Content-Type", "application/json");
+  res.status(200).json(result);
+}
+
 const getOnePost = async (req, res) => {
   const result = await dbFunctions
     .getMongoDb("posts")
@@ -20,10 +27,10 @@ const getOnePost = async (req, res) => {
 
 const createPost = async (req, res) => {
   const post = {
-    body: req.body.body,
+    authorId: req.body.authorId,
     image: req.body.image,
     caption: req.body.caption,
-    location: req.body.location,
+    date: req.body.date
   };
   const result = await dbFunctions.getMongoDb("posts").insertOne(post);
   res.setHeader("Content-Type", "application/json");
@@ -52,4 +59,5 @@ module.exports = {
   createPost,
   updatePost,
   removePost,
+  getAllPostsByAuthorId
 };

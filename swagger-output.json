@@ -35,7 +35,7 @@
             "schema": {
               "type": "object",
               "properties": {
-                "body": {
+                "authorId": {
                   "example": "any"
                 },
                 "image": {
@@ -44,7 +44,7 @@
                 "caption": {
                   "example": "any"
                 },
-                "location": {
+                "date": {
                   "example": "any"
                 }
               }
@@ -117,6 +117,27 @@
         }
       }
     },
+    "/posts/{followers}": {
+      "get": {
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "followers",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/users/": {
       "get": {
         "description": "",
@@ -141,7 +162,7 @@
             "schema": {
               "type": "object",
               "properties": {
-                "givenName": {
+                "auth0Id": {
                   "example": "any"
                 },
                 "firstName": {
@@ -170,7 +191,7 @@
         }
       }
     },
-    "/users/{id}": {
+    "/users/{auth0id}": {
       "get": {
         "description": "",
         "produces": [
@@ -178,7 +199,7 @@
         ],
         "parameters": [
           {
-            "name": "id",
+            "name": "auth0id",
             "in": "path",
             "required": true,
             "type": "string"
@@ -189,7 +210,9 @@
             "description": "OK"
           }
         }
-      },
+      }
+    },
+    "/users/{id}": {
       "put": {
         "description": "",
         "produces": [
