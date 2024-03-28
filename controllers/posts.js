@@ -1,42 +1,55 @@
-const mongodb = require('mongodb');
-const ObjectId = mongodb.ObjectId;
+const mongodb = require("../db/connect");
+const ObjectId = require("mongodb").ObjectId;
+const dbFunctions = require("./index");
 
-const getAllPost = async (req, res) => {
-    const result = await mongodb.getDb().db().collection('followers').find();
-    result.toArray().then((lists) => {
-      res.setHeader('Content-Type', 'application/json');
-      res.status(200).json(lists);
-    });
-  };
+const getAllPosts = async (req, res) => {
+  const result = await dbFunctions.getMongoDb("posts").find();
+  result.toArray().then((lists) => {
+    res.setHeader("Content-Type", "application/json");
+    res.status(200).json(lists);
+  });
+};
 
 const getOnePost = async (req, res) => {
-    const result = await mongodb.getDb().db().collection('followers').findOne({ _id: ObjectId(req.params.id) });
-    res.setHeader('Content-Type', 'application/json');
-    res.status(200).json(result);
-    }
+  const result = await dbFunctions
+    .getMongoDb("posts")
+    .findOne({ _id: new ObjectId(req.params.id) });
+  res.setHeader("Content-Type", "application/json");
+  res.status(200).json(result);
+};
 
 const createPost = async (req, res) => {
-    const result = await mongodb.getDb().db().collection('followers').insertOne(req.body);
-    res.setHeader('Content-Type', 'application/json');
-    res.status(201).json(result);
-  }
+  const post = {
+    body: req.body.body,
+    image: req.body.image,
+    caption: req.body.caption,
+    location: req.body.location,
+  };
+  const result = await dbFunctions.getMongoDb("posts").insertOne(post);
+  res.setHeader("Content-Type", "application/json");
+  res.status(201).json(result);
+};
 
 const updatePost = async (req, res) => {
-    const result = await mongodb.getDb().db().collection('followers').updateOne({ _id: ObjectId(req.params.id) }, { $set: req.body });
-    res.setHeader('Content-Type', 'application/json');
-    res.status(200).json(result);
-  }
+  const result = await dbFunctions
+    .getMongoDb("posts")
+    .updateOne({ _id: new ObjectId(req.params.id) }, { $set: req.body });
+  res.setHeader("Content-Type", "application/json");
+  res.status(200).json(result);
+};
 
 const removePost = async (req, res) => {
-    const result = await mongodb.getDb().db().collection('followers').deleteOne({ _id: ObjectId(req.params.id) });
-    res.setHeader('Content-Type', 'application/json');
-    res.status(200).json(result);
-  }
+  const result = await dbFunctions
+    .getMongoDb("posts")
+    .deleteOne({ _id: new ObjectId(req.params.id) });
+  res.setHeader("Content-Type", "application/json");
+  res.status(200).json(result);
+};
 
 module.exports = {
-    getAllPost,
-    getOnePost,
-    createPost,
-    updatePost,
-    removePost,
-  };
+  getAllPosts,
+  getOnePost,
+  createPost,
+  updatePost,
+  removePost,
+};

@@ -1,12 +1,9 @@
 const mongodb = require("../db/connect");
 const ObjectId = require("mongodb").ObjectId;
-
-function getMongoDb(name) {
-  return mongodb.getDb().db("frogforum").collection(name);
-}
+const dbFunctions = require("./index");
 
 const getAllUsers = async (req, res) => {
-  const result = await getMongoDb("users").find();
+  const result = await dbFunctions.getMongoDb("users").find();
   result.toArray().then((lists) => {
     res.setHeader("Content-Type", "application/json");
     res.status(200).json(lists);
@@ -15,7 +12,7 @@ const getAllUsers = async (req, res) => {
 
 const getOneUser = async (req, res) => {
   const userId = new ObjectId(req.params.id);
-  const result = await getMongoDb("users").findOne({ _id: userId });
+  const result = await dbFunctions.getMongoDb("users").findOne({ _id: userId });
   res.setHeader("Content-Type", "application/json");
   res.status(200).json(result);
 };
@@ -27,17 +24,18 @@ const createUser = async (req, res) => {
     lastName: req.body.lastName,
     birthday: req.body.birthday,
     profilePicUrl: req.body.profilePicUrl,
-    email: req.body.email,
+    email: req.body.email
   };
-  const result = await mongodb;
-  getMongoDb("users").insertOne(user);
+  const result = await dbFunctions.getMongoDb("users").insertOne(user);
   res.setHeader("Content-Type", "application/json");
   res.status(201).json(result);
 };
 
 const updateUser = async (req, res) => {
-  const result = await getMongoDb("users").updateOne(
-    { _id: new ObjectId(req.params.id) },
+  const result = await dbFunctions.getMongoDb("users").updateOne(
+    {
+      _id: new ObjectId(req.params.id),
+    },
     { $set: req.body }
   );
   res.setHeader("Content-Type", "application/json");
@@ -45,7 +43,7 @@ const updateUser = async (req, res) => {
 };
 
 const removeUser = async (req, res) => {
-  const result = await getMongoDb("users").deleteOne({
+  const result = await dbFunctions.getMongoDb("users").deleteOne({
     _id: new ObjectId(req.params.id),
   });
   res.setHeader("Content-Type", "application/json");

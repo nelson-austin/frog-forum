@@ -28,6 +28,29 @@
         "produces": [
           "application/json"
         ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "body": {
+                  "example": "any"
+                },
+                "image": {
+                  "example": "any"
+                },
+                "caption": {
+                  "example": "any"
+                },
+                "location": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
         "responses": {
           "201": {
             "description": "Created"
