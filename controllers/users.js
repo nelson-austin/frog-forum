@@ -11,7 +11,6 @@ const getAllUsers = async (req, res) => {
 };
 
 const getOneUser = async (req, res) => {
-  const userId = new ObjectId(req.params.id);
   const result = await dbFunctions.getMongoDb("users").findOne({ auth0Id: req.body.auth0Id });
   res.setHeader("Content-Type", "application/json");
   res.status(200).json(result);

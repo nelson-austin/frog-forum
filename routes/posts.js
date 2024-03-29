@@ -4,9 +4,9 @@ const postsController = require('../controllers/posts');
 
 router.get('/', postsController.getAllPosts);
 
-router.get('/:id', postsController.getOnePost);
+//router.get('/:id', postsController.getOnePost);
 
-router.get('/:followers', postsController.getAllPostsByAuthorId);
+router.get('/:id', postsController.getAllPostsByAuthorId);
 
 router.post('/', postsController.createPost);
 

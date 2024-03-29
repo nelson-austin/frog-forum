@@ -10,12 +10,17 @@ const getAllPosts = async (req, res) => {
   });
 };
 
-const getAllPostsByAuthorId = async(req, res) => {
-  const ids = req.params.followers.split(',');
-  const result = await dbFunctions.getMongoDb("posts").findAll({ authorId: {$in: ids} }).toArray();
-  res.setHeader("Content-Type", "application/json");
-  res.status(200).json(result);
-}
+const getAllPostsByAuthorId = async (req, res) => {
+  const ids = req.params.id.split(",");
+  const result = await dbFunctions
+    .getMongoDb("posts")
+    .find({ authorId: { $in: ids } });
+  result.toArray()
+  .then((lists) => {
+    res.setHeader("Content-Type", "application/json");
+    res.status(200).json(lists);
+  });
+};
 
 const getOnePost = async (req, res) => {
   const result = await dbFunctions
@@ -30,7 +35,7 @@ const createPost = async (req, res) => {
     authorId: req.body.authorId,
     image: req.body.image,
     caption: req.body.caption,
-    date: req.body.date
+    date: req.body.date,
   };
   const result = await dbFunctions.getMongoDb("posts").insertOne(post);
   res.setHeader("Content-Type", "application/json");
@@ -59,5 +64,5 @@ module.exports = {
   createPost,
   updatePost,
   removePost,
-  getAllPostsByAuthorId
+  getAllPostsByAuthorId,
 };
