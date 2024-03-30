@@ -3,7 +3,10 @@ const ObjectId = require("mongodb").ObjectId;
 const dbFunctions = require("./index");
 
 const getAllPosts = async (req, res) => {
-  const result = await dbFunctions.getMongoDb("posts").find();
+  const result = await dbFunctions
+    .getMongoDb("posts")
+    .find()
+    .sort({ date: -1 });
   result.toArray().then((lists) => {
     res.setHeader("Content-Type", "application/json");
     res.status(200).json(lists);
@@ -15,8 +18,10 @@ const getAllPostsByAuthorId = async (req, res) => {
   console.log(ids);
   const result = await dbFunctions
     .getMongoDb("posts")
-    .find({ authorId: { $in: ids } });
+    .find({ authorId: { $in: ids } })
+    .sort({ date: -1 });
   result.toArray().then((lists) => {
+    lists.sort((a, b) => b.date - a.date);
     res.setHeader("Content-Type", "application/json");
     res.status(200).json(lists);
   });
@@ -35,7 +40,7 @@ const createPost = async (req, res) => {
     authorId: req.body.authorId,
     image: req.body.image,
     caption: req.body.caption,
-    date: req.body.date,
+    date: new Date(),
   };
   const result = await dbFunctions.getMongoDb("posts").insertOne(post);
   res.setHeader("Content-Type", "application/json");
