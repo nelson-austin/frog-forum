@@ -4,12 +4,14 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongodb = require("./db/connect");
 require("dotenv").config();
+const cors = require('cors');
 
 const app = express();
 const port = process.env.PORT || 3000;
 
 app
   .use(bodyParser.json())
+  .use(cors())
   .use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
     next();
