@@ -11,8 +11,7 @@ const getAllFollowers = async (req, res) => {
   };
 
 const getOneFollowers = async (req, res) => {
-    const userId = new ObjectId(req.params.id);
-    const result = await mongodb.getDb().db('frogforum').collection('followers').find({ _id: userId });
+    const result = await mongodb.getDb().db('frogforum').collection('followers').find({ userId: req.params.id });
     result.toArray().then((lists) => {
       res.setHeader('Content-Type', 'application/json');
       res.status(200).json(lists[0]);
