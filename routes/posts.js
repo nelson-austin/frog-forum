@@ -6,7 +6,7 @@ router.get('/', postsController.getAllPosts);
 
 //router.get('/:id', postsController.getOnePost);
 
-router.get('/:id', postsController.getAllPostsByAuthorId);
+router.get('/:ids', postsController.getAllPostsByAuthorId);
 
 router.post('/', postsController.createPost);
 

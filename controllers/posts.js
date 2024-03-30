@@ -11,12 +11,12 @@ const getAllPosts = async (req, res) => {
 };
 
 const getAllPostsByAuthorId = async (req, res) => {
-  const ids = req.params.id.split(",");
+  const ids = req.params.ids.split(",");
+  console.log(ids);
   const result = await dbFunctions
     .getMongoDb("posts")
     .find({ authorId: { $in: ids } });
-  result.toArray()
-  .then((lists) => {
+  result.toArray().then((lists) => {
     res.setHeader("Content-Type", "application/json");
     res.status(200).json(lists);
   });
