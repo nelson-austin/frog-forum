@@ -10,8 +10,7 @@ const getAllFollowing = async (req, res) => {
   };
 
 const getOneFollowing = async (req, res) => {
-  const userId = new ObjectId(req.params.id);
-  const result = await mongodb.getDb().db('frogforum').collection('following').find({ _id: userId });
+  const result = await mongodb.getDb().db('frogforum').collection('following').find({ userId: req.params.id });
   result.toArray().then((lists) => {
     res.setHeader('Content-Type', 'application/json');
     res.status(200).json(lists[0]);
