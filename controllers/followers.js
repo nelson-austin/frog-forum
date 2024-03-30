@@ -29,26 +29,18 @@ const createFollowers = async (req, res) => {
   }
 
 const updateFollowers = async (req, res) => {
-  if (!ObjectId.isValid(req.params.id)) {
-    res.status(400).json('Invalid user id. Please try again.');
-  }
-  const userId = new ObjectId(req.params.id);
   const followers = {
     userId: req.body.userId,
     followers: req.body.followers
   }
-  const result = await mongodb.getDb().db('frogforum').collection('followers').replaceOne({ _id: userId }, followers);
+  const result = await mongodb.getDb().db('frogforum').collection('followers').replaceOne({ userId: req.params.id }, followers);
   console.log(result);
   res.setHeader('Content-Type', 'application/json');
   res.status(200).json(result);
 }
 
 const removeFollowers = async (req, res) => {
-  if (!ObjectId.isValid(req.params.id)) {
-    res.status(400).json('Invalid user id. Please try again.');
-  }
-  const userId = new ObjectId(req.params.id);
-  const result = await mongodb.getDb().db('frogforum').collection('followers').deleteOne({ _id: userId });
+  const result = await mongodb.getDb().db('frogforum').collection('followers').deleteOne({ userId: req.params.id });
   res.setHeader('Content-Type', 'application/json');
   res.status(200).json(result);
   }
