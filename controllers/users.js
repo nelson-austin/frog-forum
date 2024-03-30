@@ -11,9 +11,11 @@ const getAllUsers = async (req, res) => {
 };
 
 const getOneUser = async (req, res) => {
-  const result = await dbFunctions.getMongoDb("users").findOne({ auth0Id: req.body.auth0Id });
-  res.setHeader("Content-Type", "application/json");
-  res.status(200).json(result);
+  const result = await mongodb.getDb().db('frogforum').collection('users').find({ auth0Id: req.params.auth0id });
+  result.toArray().then((lists) => {
+    res.setHeader('Content-Type', 'application/json');
+    res.status(200).json(lists[0]);
+  });
 };
 
 const createUser = async (req, res) => {
