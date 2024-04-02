@@ -1,17 +1,17 @@
-const router = require('express').Router();
+const router = require("express").Router();
+const postsController = require("../controllers/posts");
+const validation = require("../middleware/postValidation");
 
-const postsController = require('../controllers/posts');
-
-router.get('/', postsController.getAllPosts);
+router.get("/", postsController.getAllPosts);
 
 //router.get('/:id', postsController.getOnePost);
 
-router.get('/:ids', postsController.getAllPostsByAuthorId);
+router.get("/:ids", postsController.getAllPostsByAuthorId);
 
-router.post('/', postsController.createPost);
+router.post("/", validation.savePost, postsController.createPost);
 
-router.put('/:id', postsController.updatePost);
+router.put("/:id", validation.savePost, postsController.updatePost);
 
-router.delete('/:id', postsController.removePost);
+router.delete("/:id", postsController.removePost);
 
 module.exports = router;

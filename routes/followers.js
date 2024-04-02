@@ -1,15 +1,19 @@
-const router = require('express').Router();
+const router = require("express").Router();
+const followersController = require("../controllers/followers");
+const validation = require("../middleware/followerValidation");
 
-const followersController = require('../controllers/followers');
+router.get("/", followersController.getAllFollowers);
 
-router.get('/', followersController.getAllFollowers);
+router.get("/:id", followersController.getOneFollowers);
 
-router.get('/:id', followersController.getOneFollowers);
+router.post("/", validation.saveFollower, followersController.createFollowers);
 
-router.post('/', followersController.createFollowers);
+router.put(
+  "/:id",
+  validation.saveFollower,
+  followersController.updateFollowers
+);
 
-router.put('/:id', followersController.updateFollowers);
-
-router.delete('/:id', followersController.removeFollowers);
+router.delete("/:id", followersController.removeFollowers);
 
 module.exports = router;
