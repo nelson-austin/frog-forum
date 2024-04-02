@@ -64,7 +64,6 @@ const createUser = async (req, res) => {
         result.error || "An error occurred while trying to create the user"
       );
   }
-  res.status(201).json(result);
 };
 
 const updateUser = async (req, res) => {
