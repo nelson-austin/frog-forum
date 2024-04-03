@@ -3,7 +3,7 @@ const validator = require("./helper");
 const saveFollowing = (req, res, next) => {
   const validationRule = {
     userId: "required|string",
-    following: "array|required",
+    following: "array|present",
   };
   validator(req.body, validationRule, {}, (err, status) => {
     if (!status) {
