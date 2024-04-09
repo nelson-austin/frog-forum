@@ -30,6 +30,7 @@
     "validatorjs": "^3.22.1"
   },
   "devDependencies": {
+    "@shelf/jest-mongodb": "^4.2.0",
     "nodemon": "^3.1.0",
     "swagger-autogen": "^2.23.7"
   }
