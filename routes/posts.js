@@ -4,7 +4,7 @@ const validation = require("../middleware/postValidation");
 
 router.get("/", postsController.getAllPosts);
 
-//router.get('/:id', postsController.getOnePost);
+router.get('/by-id/:id', postsController.getOnePost);
 
 router.get("/:ids", postsController.getAllPostsByAuthorId);
 
