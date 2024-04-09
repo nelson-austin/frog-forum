@@ -10,8 +10,7 @@
 
 // To run the tests, run the following command:
 // npm test
-
-// write the unit tests for the followers routes
+// The tests will run and output the results to the console.
 
 
 const request = require('supertest');
