@@ -124,6 +124,24 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "authorId": {
+                  "example": "any"
+                },
+                "image": {
+                  "example": "any"
+                },
+                "caption": {
+                  "example": "any"
+                }
+              }
+            }
           }
         ],
         "responses": {
@@ -281,6 +299,33 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "auth0Id": {
+                  "example": "any"
+                },
+                "firstName": {
+                  "example": "any"
+                },
+                "lastName": {
+                  "example": "any"
+                },
+                "birthday": {
+                  "example": "any"
+                },
+                "profilePicUrl": {
+                  "example": "any"
+                },
+                "email": {
+                  "example": "any"
+                }
+              }
+            }
           }
         ],
         "responses": {

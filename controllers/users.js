@@ -67,11 +67,19 @@ const createUser = async (req, res) => {
 };
 
 const updateUser = async (req, res) => {
+  const user = {
+    auth0Id: req.body.auth0Id,
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    birthday: req.body.birthday,
+    profilePicUrl: req.body.profilePicUrl,
+    email: req.body.email,
+  };
   const result = await dbFunctions.getMongoDb("users").updateOne(
     {
       _id: new ObjectId(req.params.id),
     },
-    { $set: req.body }
+    { $set: user }
   );
   res.setHeader("Content-Type", "application/json");
   if (result.modifiedCount > 0) {

@@ -72,9 +72,15 @@ const createPost = async (req, res) => {
 };
 
 const updatePost = async (req, res) => {
+  const post = {
+    authorId: req.body.authorId,
+    image: req.body.image,
+    caption: req.body.caption,
+    date: new Date(),
+  };
   const result = await dbFunctions
     .getMongoDb("posts")
-    .updateOne({ _id: new ObjectId(req.params.id) }, { $set: req.body });
+    .updateOne({ _id: new ObjectId(req.params.id) }, { $set: post });
   res.setHeader("Content-Type", "application/json");
   if (result.modifiedCount > 0) {
     res.status(204).json(result);
